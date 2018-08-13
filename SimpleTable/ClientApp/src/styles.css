@@ -2,8 +2,9 @@
 @import url("../node_modules/font-awesome/css/font-awesome.min.css");
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
-table {
-  width: 100%;
+body {
+  background-color: #fafafa;
+  margin: 20px;
 }
 
 .mat-form-field {
@@ -11,6 +12,24 @@ table {
   width: 100%;
 }
 
-td, th {
-  width: 25%;
+table{
+  width: 100%;
+}
+
+.mat-radio-group {
+  display: inline-flex;
+  flex-direction: row;
+}
+
+.mat-radio-group-error {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.mat-radio-button {
+  margin: 5px;
+}
+
+.mat-dialog-content {
+  overflow-y: hidden !important;
 }

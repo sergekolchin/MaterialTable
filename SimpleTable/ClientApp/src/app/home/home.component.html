@@ -1,2 +1,50 @@
-Home page
+<mat-grid-list cols="4" rowHeight="100px">
+  <mat-grid-tile [colspan]="3">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1">
+    <button mat-raised-button color="primary" (click)="openDialog()">Add</button>
+  </mat-grid-tile>
+</mat-grid-list>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+    </ng-container>
+    <ng-container matColumnDef="fullName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let row"> {{row.fullName}} </td>
+    </ng-container>
+    <ng-container matColumnDef="birthDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Birth date</th>
+      <td mat-cell *matCellDef="let row"> {{row.birthDate | date : "mediumDate" }} </td>
+    </ng-container>
+    <ng-container matColumnDef="gender">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Gender</th>
+      <td mat-cell *matCellDef="let row"> {{row.gender | gender}} </td>
+    </ng-container>
+    <ng-container matColumnDef="isCertified">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Certified</th>
+      <td mat-cell *matCellDef="let row"> <mat-icon *ngIf="row.isCertified">check_box</mat-icon> </td>
+    </ng-container>
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone</th>
+      <td mat-cell *matCellDef="let row">+{{row.phone}} </td>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+      <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+    </ng-container>
+    <ng-container matColumnDef="department">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Department</th>
+      <td mat-cell *matCellDef="let row"> {{row.department?.name}} </td>
+    </ng-container>
 
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

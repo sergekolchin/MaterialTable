@@ -1,0 +1,67 @@
+<form [formGroup]="formGroup" (ngSubmit)="submit(formGroup)" novalidate>
+  <h1 mat-dialog-title>Add employee</h1>
+  <div mat-dialog-content>
+    <input matInput formControlName="id" hidden="">
+    <mat-form-field>
+      <input matInput formControlName="firstName" placeholder="First name">
+      <mat-error>
+        First name is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="lastName" placeholder="Last name">
+      <mat-error>
+        Last name is required
+      </mat-error>
+    </mat-form-field>
+    <mat-radio-group class="mat-radio-group" [formControl]="genderId">
+      <mat-radio-button class="mat-radio-button" *ngFor="let gender of genders; let indx = index" [value]="gender.id">
+        {{gender.name}}
+      </mat-radio-button>
+    </mat-radio-group>
+    <mat-error *ngIf="genderId.hasError('required')" style="font-size: 75%">
+      Gender is required
+    </mat-error>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Choose date of birth" formControlName="birthDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error>
+        Date of birth is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <span matPrefix>+</span>
+      <input type="tel" matInput formControlName="phone" placeholder="Phone">
+      <mat-icon matSuffix>phone</mat-icon>
+      <mat-error>
+        Phone number is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="email" matInput [formControl]="email" placeholder="Email">
+      <mat-icon matSuffix>email</mat-icon>
+      <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="email.hasError('required')">
+        Email is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Choose department" formControlName="departmentId">
+        <mat-option *ngFor="let department of departments" [value]="department.id">
+          {{department.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error>
+        Department is required
+      </mat-error>
+    </mat-form-field>
+    <mat-checkbox formControlName="isCertified">Is certified?</mat-checkbox>
+  </div>
+  <div mat-dialog-actions align="center">
+    <button mat-raised-button [mat-dialog-close]="undefined" (click)="onCancelClick()">Cancel</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="formGroup.invalid">Save</button>
+  </div>
+</form>
